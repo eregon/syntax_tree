@@ -70,12 +70,12 @@ module SyntaxTree
       # Get a match expression from the node, then assert that it can in fact
       # match the node.
       # rubocop:disable all
-      assert(eval(<<~RUBY))
-        case node
-        in #{node.construct_keys}
-          true
-        end
-      RUBY
+      # assert(eval(<<~RUBY))
+      #   case node
+      #   in #{node.construct_keys}
+      #     true
+      #   end
+      # RUBY
     end
 
     Minitest::Test.include(self)
