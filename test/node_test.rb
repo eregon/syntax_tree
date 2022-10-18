@@ -759,9 +759,9 @@ module SyntaxTree
       program = parser.parse
       refute(parser.error?)
 
-      case program
-      in statements: { body: [statement] }
-        assert_kind_of(VCall, statement)
+      case; when ((__m__ = program)) && false
+      when (((statement,) = nil) || (__m__.respond_to?(:deconstruct_keys) && (((__m_hash__ = __m__.deconstruct_keys([:statements])) || true) && (Hash === __m_hash__ || Kernel.raise(TypeError, "#deconstruct_keys must return Hash"))) && (__m_hash__.key?(:statements) && (__m_hash__[:statements].respond_to?(:deconstruct_keys) && (((__m_hash__k0__ = __m_hash__[:statements].deconstruct_keys([:body])) || true) && (Hash === __m_hash__k0__ || Kernel.raise(TypeError, "#deconstruct_keys must return Hash"))) && (__m_hash__k0__.key?(:body) && (__m_hash__k0__[:body].respond_to?(:deconstruct) && (((__m_hash__k0__k1__ = __m_hash__k0__[:body].deconstruct) || true) && (Array === __m_hash__k0__k1__ || Kernel.raise(TypeError, "#deconstruct must return Array"))) && (1 == __m_hash__k0__k1__.size) && ((statement = __m_hash__k0__k1__[0]) || true)))))))
+        assert_kind_of(VCall, statement); else; Kernel.raise(NoMatchingPatternError, __m__.inspect)
       end
 
       json = JSON.parse(program.to_json)
@@ -1047,11 +1047,11 @@ module SyntaxTree
 
     def test_root_class_raises_not_implemented_errors
       {
-        accept: [nil],
-        child_nodes: [],
-        deconstruct: [],
-        deconstruct_keys: [[]],
-        format: [nil]
+          accept: [nil],
+          child_nodes: [],
+          deconstruct: [],
+          deconstruct_keys: [[]],
+          format: [nil]
       }.each do |method, arguments|
         assert_raises(NotImplementedError) do
           Node.new.public_send(method, *arguments)
@@ -1063,22 +1063,22 @@ module SyntaxTree
 
     def location(lines: 1..1, chars: 0..0, columns: 0..0)
       Location.new(
-        start_line: lines.begin,
-        start_char: chars.begin,
-        start_column: columns.begin,
-        end_line: lines.end,
-        end_char: chars.end,
-        end_column: columns.end
+          start_line: lines.begin,
+          start_char: chars.begin,
+          start_column: columns.begin,
+          end_line: lines.end,
+          end_char: chars.end,
+          end_column: columns.end
       )
     end
 
     def assert_node(kind, source, at: nil)
       at ||=
-        location(
-          lines: 1..[1, source.count("\n")].max,
-          chars: 0..source.chomp.size,
-          columns: 0..source.chomp.size
-        )
+          location(
+              lines: 1..[1, source.count("\n")].max,
+              chars: 0..source.chomp.size,
+              columns: 0..source.chomp.size
+          )
 
       # Parse the example, get the outputted parse tree, and assert that it was
       # able to successfully parse.
